@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivinhar game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+    
+    <h1>Adivinhe o numero de 1 a 100!!!!</h1>
+
+    <div>
+    <label for="numero">Chute o número: </label>
+    <input type="number" name="numero" id="numero" step="1">
+    </div>
+    <button>Acertei?</button>
+    <p class="resultado"></p>
+    <p class="tentativas"></p>
+
+ </div>
+    
+    <script>
+        let numero = document.getElementById("numero");
+        let resultado = document.querySelector(".resultado");
+        let sorteio = Math.ceil( Math.random()*100 );
+        let botao = document.querySelector("button");
+        let tentativas = document.querySelector(".tentativas")
+        let count = 10
+        
+        function teste(){
+                            
+                if (numero.value == sorteio){
+                    resultado.innerHTML = `voce acertou, o numero é ${sorteio}`;
+                    botao.disabled = true;
+                }
+
+                if (numero.value < sorteio){
+                    resultado.innerHTML = `é maior que ${numero.value}`;
+                    count -= 1
+                    tentativas.innerHTML = `voce tem agora ${count} tentativas...`;
+                    
+                }
+
+                if (numero.value > sorteio){
+                    resultado.innerHTML = `é menor que ${numero.value}`;
+                    count -=1
+                    tentativas.innerHTML = `voce tem agora ${count} tentativas...`;
+                }
+
+                if (count == 0 && numero.value != sorteio){
+                    tentativas.innerHTML = `Suas tentativas acabaram, o valor correto era ${sorteio}`
+                    botao.disabled = true
+                }
+                
+            }
+    
+        botao.addEventListener("click", teste);
+    </script>
+
+</body>
+</html>
